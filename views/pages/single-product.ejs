@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+    <div class="jumbotron text-center">
+      <div class="container">
+        <h1>
+          <%= title %>
+        </h1>
+        <h3><%= product.name%></h3>
+        <p>Selling history</p>
+        <ul>
+            <% let total_gain = 0%>
+
+            <% if (transfer.length == 0){ %>
+                <h4>NO TRANSFER RECORD</h4>
+            <%}%>
+
+            <% for(let item of transfer){ %>
+  
+            <li> Buying Quantity:<%= item.quantity%>  single-price: <%= item.price%>  Date: <%= item.date%></li>
+                <% total_gain += item.price * item.quantity%>
+
+            <% } %>
+        </ul>
+        <p>Total Gain: <%= total_gain%></p>
+
+      </div>
+    </div>
+    <div class="container">
+
+    </div>
+
+
+</body>
+
+</html>

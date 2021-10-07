@@ -1,0 +1,38 @@
+After completing the assignment, be sure to push to Github and Heroku.
+Please answer the questions in this text file and submit it to I-Learn.
+
+1. Copy and paste the URL for your web application (e.g., Heroku):
+https://secret-cliffs-34911.herokuapp.com/
+
+2. Copy and paste the URL for your source code repository (e.g., GitHub):
+https://github.com/sam796/CSE341_backendII
+
+3. Briefly list and describe the elements of the application that are functioning.
+All the elements are functioning. authentication system is working. 
+The database includes the user information which allows future logins.
+
+4. Briefly describe any pieces of the assignment that are not yet working correctly.
+none
+
+
+5. Briefly describe the "coolest" thing you learned while completing this assignment.
+Working on the user information which allows the furute logins.
+This project gave me a good understnding of backend.
+
+
+6. If you could change this assignment to be more effective or helpful, what would you change?
+Nothing, It was very helpful.
+
+
+7. Please select the category you feel best describes your assignment: 4
+   1 - Some attempt was made
+   2 - Developing, but significantly deficient
+   3 - Slightly deficient, but still mostly adequate
+   4 - Meets requirements
+   5 - Shows creativity and excels above and beyond requirements
+
+8. Provide a brief justification (1-2 sentences) for selecting that category.
+MVC pattern used correctly.
+Routing and middleware used appropriately.
+Validation functioning and messages presented.
+Site contains appropriate amount of styling and is organized well

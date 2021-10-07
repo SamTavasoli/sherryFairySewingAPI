@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+    <div class="jumbotron text-center">
+      <div class="container">
+        <h1>
+          <%= title %>
+        </h1>
+        <h2>Sign Up Page</h2>
+        <form action="/create-user" method="POST">
+            <input type="email" name="email" placeholder="Enter your email">
+            <input type="text" name="fname" placeholder="Enter your legal first name">
+            <input type="text" name="lname" placeholder="Enter your legal last name">
+            <p>Password at least contain 8 charactors</p>
+            <input type="password" name="pw" placeholder="Enter your password">
+            <input type="submit">
+        </form>
+    
+    <div id="snackbar"></div>
+
+</body>
+<script>
+  $(".addCart").click(function(){
+    $("#snackbar").html("Success");
+		$("#snackbar").last().addClass("show");
+        setTimeout(function() {$("#snackbar").removeClass( "show" ); added = ""}, 3000);
+  })
+</script>
+
+</html>

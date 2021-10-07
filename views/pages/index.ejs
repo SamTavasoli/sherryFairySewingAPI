@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+    <div class="jumbotron text-center">
+      <div class="container">
+        <h1>
+          <%= title %>
+        </h1>
+        <p>We welcome anyone who does not like google translate</p>
+        <div class="container">
+          <div class="row">
+        <% if (products.length > 0){%>
+          <% for(let product of products){ %>
+
+          <div class="col-4 col-lg-2 col-sm-6">
+            <div class="container">
+            <div class="row justify-content-around h-100"><a href="./single-product/<%= product.id%>"><h3><%= product.name%></a> </div>
+            <div class="row">
+              <a href="./single-product/<%= product.id%>"><img class="product-img" src="/images/<%= product.id%>.jpg"></img></a>
+            </div>
+            <div class="row" id="detail">
+              <div class="col-4 col-lg-4 col-sm-4">inStock:<%= product.inStock%></div> 
+              <div class="col-4 col-lg-4 col-sm-4">price: $<%= product.price%></div>
+              <div class="col-4 col-lg-4 col-sm-4"><a id="<%= product.name%>&<%= product.price%>&<%=product.id%>" href="#" class="addCart">Add</a></div>
+            </div>
+            </div>
+          </div>
+          <% } %>
+        <% } %>
+      </div>
+      </div>
+        <p>These are the favourite Dictionaries that you can find in the libraries or you can rent or buy it online.</p>
+        
+      </div>
+    </div>
+    
+    <div id="snackbar"></div>
+
+</body>
+<script>
+  $(".addCart").click(function (){
+    var req = this.id;
+    const req_list = req.split("&");
+    console.log(req);
+
+    $.post("/addCart", 
+    { 
+      id: req_list[2], 
+      name: req_list[0], 
+      price: req_list[1]
+    },
+    function(data, status){
+      if (data){
+        $("#snackbar").html(data);
+		    $("#snackbar").last().addClass("show");
+        setTimeout(function() {$("#snackbar").removeClass( "show" ); added = ""}, 3000);
+    }});
+  })
+</script>
+
+</html>

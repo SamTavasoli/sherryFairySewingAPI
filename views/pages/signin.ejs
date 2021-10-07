@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <% include ../includes/header.ejs %>
+</head>
+
+<body>
+  <% include ../includes/nav.ejs %>
+    <div class="jumbotron text-center">
+      <div class="container">
+        <h1>
+          <%= title %>
+        </h1>
+        <h2>Login Page</h2>
+        
+        <input type="email" name="email" placeholder="Enter your email">
+        <input type="password" name="pw" placeholder="Enter your password">
+        <a id="submit" class="addCart" > Submit</a>
+    
+    <div id="snackbar"></div>
+
+</body>
+<script>
+$( "#submit" ).click(function() {
+  $.post("/login-user", 
+    { 
+        email: $( "input[name='email']" ).val(),
+        pw: $( "input[name='pw']" ).val()
+    },
+    function(data, status){
+    console.log("Data: " + data + "\nStatus: " + status);
+    $("#snackbar").html(data);
+    $("#snackbar").last().addClass("show");
+    setTimeout(function() {$("#snackbar").removeClass( "show" ); added = ""}, 3000);
+    if (data == "success"){
+        window.location.replace("./");
+    }
+  });
+});
+
+</script>
+
+</html>
