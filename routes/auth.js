@@ -1,92 +1,82 @@
-// Remember, you can make more of these placeholders yourself!
-const express = require('express')
+const express = require("express");
+
+const { check, body } = require("express-validator");
+
 const router = express.Router();
-const fs = require('fs');
-var mongoose = require('mongoose');
-var books = [];
-var title = "Welcome to the wonder Jouna's Dictionary Place";
 
+const User = require("../models/user");
 
-const User = mongoose.model('User', mongoose.Schema({
-  email: String,
-  fname: String,
-  lname: String,
-  pw: String,
-  cart: [{
-    itemID: Number,
-    name: String,
-    price: Number
-  }]
-}));
+const authController = require("../controllers/auth");
 
+const {
+  getLogin,
+  postLogin,
+  postLogout,
+  getSignup,
+  postSignup,
+  getReset,
+  postReset,
+  getNewPassword,
+  postNewPassword
+} = authController;
 
-router.get('/', (req, res, next) => {
-  // This is the primary index, always handled last.
-  let state = "";
-  
-  
-router.get('/signup', (req, res, next) => {
-  res.render('pages/signup', {
-    title: title,
-    path: '/'
-  });
-}})
+// router.get("/login", getLogin);
 
-router.get('/signin', (req, res, next) => {
-  res.render('pages/signin', {
-    title: title,
-    path: '/'
-  });
-})
+// router.get("/signup", getSignup);
 
-router.post('/login-user', (req, res, next) => {
-  User.find({email: req.body.email, pw: req.body.pw},function(err, docs){
-    if (err){
-      console.log(err)
-      res.send("Server not connected");
-    }
-    else{
-      console.log(docs)
-      if (docs.length <= 0){
-        res.send("Username or Password is incorrect.");
-      }
-      else{
-        req.session.userid = docs[0].email;
-        res.send("success");
-      }
-    }
-  })
-})
+router.post(
+  "/signup",
+  [
+    check("email")
+      .isEmail()
+      .withMessage("enter a valid email")
+      .normalizeEmail()
+      .custom(async (value, { req }) => {
+        const user = await User.findOne({ email: value });
+        if (user) {
+          return Promise.reject("Email already exists");
+        }
+        return user;
+      }),
+    body(
+      "password",
+      "Please enter a password with a minimum of 5 chars in length"
+    )
+      .isLength({ min: 5 })
+      .trim(),
+    body("confirmPassword")
+      .trim()
+      .custom((value, { req }) => {
+        if (value !== req.body.confirmPassword) {
+          return Promise.reject("Passwords do not match");
+        }
+        return true;
+      })
+  ],
+  postSignup
+);
 
+router.post(
+  "/login",
+  [
+    body("email").isEmail().withMessage("enter a valid email").normalizeEmail(),
+    body("password", "Password must be at least 5 chars in length")
+      .isLength({
+        min: 5
+      })
+      .trim()
+  ],
+  postLogin
+);
 
-router.post('/create-user', (req, res, next) => {
-  console.log("Create-user page");
-  User.find({email: req.body.email},function(err, docs){
-    if (err){
-      console.log(err);
-      res.send("Server not connected");
-    }else{
-      if (docs.length == 0){
-        User.create([{
-          email: req.body.email,
-          fname: req.body.fname,
-          lname:  req.body.lname,
-          pw: req.body.pw,
-          cart: []
-        }])
-      
-        res.redirect('./');
-      }
-      else{
-        res.send("Email has already existed");
-      }
-    }
-  });
-})
+router.post("/logout", postLogout);
 
-router.get('/logout',(req,res) => {
-  req.session.destroy();
-  res.redirect('/');
-})
+router.get("/reset", getReset);
+
+router.post("/reset", postReset);
+
+router.get("/reset/:token", getNewPassword);
+
+router.post("/new-password", postNewPassword);
 
 module.exports = router;

@@ -1,9 +1,0 @@
-{
-    "list": [
-        {"userId": "5", "name":"John", "lastName":"Jily", "password":"$36tu3", "id":"abc@gmail.com", "cart":[]},
-        {"userId": "4","name":"Lily", "lastName":"Pony", "password":"$4Absd2", "id":"dbic@gmail.com", "cart":[]},
-        {"userId": "6", "name":"maggi", "lastName":"Tony", "password":"$5@ved7", "id":"dd22dfd@gmail.com", "cart":[]},
-        {"userId": "7", "name":"sam", "lastName":"Rama", "password":"$4ersA6", "id":"dwdf@gmail.com", "cart":[]}
-        
-    ]
-}

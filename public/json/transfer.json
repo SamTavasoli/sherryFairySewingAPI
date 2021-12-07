@@ -1,9 +1,0 @@
-{
-    "list": [
-        {"productId":"0", "userId":"5", "quantity":100, "price":36, "date": "3 Sep, 2021"},
-        {"productId":"0", "userId":"4", "quantity":2, "price":42, "date": "12 Sep, 2021"},
-        {"productId":"1", "userId":"6", "quantity":4, "price":57, "date": "23 Sep, 2021"},
-        {"productId":"2", "userId":"7", "quantity":9, "price":46, "date": "31 Sep, 2021"}
-        
-    ]
-}
